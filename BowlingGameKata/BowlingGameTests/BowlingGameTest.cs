@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BowlingGameKata;
 
 namespace BowlingGameTests
 {
@@ -12,6 +13,7 @@ namespace BowlingGameTests
     [TestClass]
     public class BowlingGameTest
     {
+        private Game game;
         public BowlingGameTest()
         {
             //
@@ -60,11 +62,72 @@ namespace BowlingGameTests
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestGutterGame()
         {
-            //
-            // TODO: Add test logic here
-            //
+            game = new Game();
+            RollMultiple(20, 0);
+            const int EXPECTED = 0;
+            Assert.AreEqual(EXPECTED, game.Score());
+
         }
+        [TestMethod]
+        public void TestAllOnesGame()
+        {
+            game = new Game();
+            RollMultiple(20, 1);
+            const int EXPECTED = 20;
+            Assert.AreEqual(EXPECTED, game.Score());
+        }
+
+        [TestMethod]
+        public void TestOneSpare()
+        {
+            game = new Game();
+            RollSpare();
+            game.Roll(3);
+            RollMultiple(17, 0);
+            const int EXPECTED = 16;
+            Assert.AreEqual(EXPECTED, game.Score());
+        }
+
+        [TestMethod]
+        public void TestOneStrike()
+        {
+            game = new Game();
+            RollStrike();
+            game.Roll(3);
+            game.Roll(4);
+            RollMultiple(16, 0);
+            const int EXPECTED = 24;
+            Assert.AreEqual(EXPECTED, game.Score());
+        }
+
+        [TestMethod]
+        public void TestPerfectGame()
+        {
+            game = new Game();
+            RollMultiple(12,10);
+            const int EXPECTED = 300;
+            Assert.AreEqual(EXPECTED,game.Score());
+        }
+
+        public void RollMultiple(int times, int pins)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                game.Roll(pins);
+            }
+        }
+
+        public void RollStrike()
+        {
+            game.Roll(10);
+        }
+        public void RollSpare()
+        {
+            game.Roll(5);
+            game.Roll(5);
+        }
+
     }
 }

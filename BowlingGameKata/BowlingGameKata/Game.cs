@@ -4,7 +4,7 @@
     {
 
         private int[] rolls = new int[21];
-        private int currentRoll = 0;
+        private int currentRoll;
         public void Roll(int pins)
         {
             rolls[currentRoll++] = pins;
@@ -12,9 +12,9 @@
 
         public int Score()
         {
-            int score = 0;
-            int frameIndex = 0;
-            for (int frames = 0; frames < 10; frames++)
+            var score = 0;
+            var frameIndex = 0;
+            for (var frames = 0; frames < 10; frames++)
             {
                 if (IsStrike(frameIndex))
                 {

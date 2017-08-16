@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BowlingGameKata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BowlingGameKata;
 
 namespace BowlingGameTests
 {
@@ -113,7 +109,7 @@ namespace BowlingGameTests
 
         public void RollMultiple(int times, int pins)
         {
-            for (int i = 0; i < times; i++)
+            for (var i = 0; i < times; i++)
             {
                 game.Roll(pins);
             }
